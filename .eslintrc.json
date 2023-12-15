@@ -14,7 +14,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "angularV17",
+            "prefix": "app",
             "style": "camelCase"
           }
         ],
@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "angular-v17",
+            "prefix": "app",
             "style": "kebab-case"
           }
         ]
