@@ -161,7 +161,7 @@ bootstrapApplication(AppComponent, {{ '{' }}
               
 <br>
               
-## Routing im Context **Standalone Components**
+## **ROUTER:** Routing im Context **Standalone Components**
 Das Routing wird nun nicht mehr über das RouterModule konfiguriert und aktiviert, sondern es wird eine \`provide\`-Funktion zur Verfügung gestellt.
 <br>**provideRouter(routes, ...features);** nimmt als ersten Parameter eine Liste von Routen entgegen. Die nachfolgenden Parameter können genutzt werden um den Router mit weiteren Features zu erweitern.
 
@@ -181,7 +181,45 @@ bootstrapApplication(AppComponent, {{ '{' }}
 
 <br>
               
-## Provider auf Routen-Ebene
+## **ROUTER:** Provider auf Routen-Ebene
+Durch die neue Art der Router Nutzung wird in Angular v15 noch eine weitere Neuerung eingeführt: **Routen-Scope für Provider**. 
+Damit sind die Definierten Provider und Services nur innerhalb der Route und deren Subrouten gültig.
+              
+\`\`\`typescript
+export const APP_ROUTES: Routes = [{{'{'}}
+&nbsp;&nbsp;path: 'home',
+&nbsp;&nbsp;component: HomeComponent,
+&nbsp;&nbsp;provider: [importProvidersFrom(HttpClientModule), ButtonActionService]
+{{'}'}}];
+\`\`\`
+              
+<br>
+              
+## **ROUTER:** Funktionale \`canActivate\` Guards
+Die \`RouteGuards\` können nun aktiv durch eine funktion Ausgedrückt werden. Dadurch müssen keine großen Guards mehr als Klasse definiert werden.
+\`\`\`typescript
+export const APP_ROUTES: Routes = [{{'{'}}
+&nbsp;&nbsp;path: 'user',
+&nbsp;&nbsp;component: UserComponent,
+&nbsp;&nbsp;canActivate: [() => inject(AuthService).isAuthenticated()]
+{{'}'}}];
+\`\`\`
+              
+<br>
+
+## **ROUTER:** \`lazy loading\` von Subrouten
+Innerhalb der Routen können über die Property \`loadChildren\` lazy eingebunden werden. Bislang war es so, dass das der export des RoutenObjekts explizit angegeben werden musste.
+Seit Angular v15 kann für die Subrouten der \`default\` export genutzt und ein "umbiegen" auf den Custom Export ist nicht mehr notwendig.
+
+\`\`\`typescript
+export const APP_ROUTES: Routes = [{{ '{' }}
+&nbsp;&nbsp;path: 'user',
+&nbsp;&nbsp;component: UserComponent,
+&nbsp;&nbsp;loadChildren: () =>
+&nbsp;&nbsp;&nbsp;&nbsp;import('./user/user.routes')
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// .then(m => m.USER_ROUTES)
+{{ '}' }}];
+\`\`\`
 
           </app-examplebox-description>
       </app-examplebox>`,
