@@ -36,7 +36,8 @@ Keyword des Control Flows mit einem \`&#64;\` geprefixt.
  
 ### If, else, elseif
 
-In folgendem Beispiel wird gezeigt, wie der Control Flow über die standard Conditionals abgebildet werden:
+In folgendem Beispiel wird gezeigt, wie der Control Flow über die standard Conditionals abgebildet werden.
+Im Zuge dessen können nun auch \`else\` und auch \`else if\` Blöcke in Angular Templates genutzt werden. 
               
 \`\`\`html
 &#64;if (visible === true) {{ '{' }}
@@ -59,9 +60,9 @@ Angular bietet auch die Möglichkeit, switch-case blöcke direkt im Template zu 
         
 \`\`\`html
 &lt;ng-container [ngSwitch]="value"&gt;
-    &lt;ng-container *ngSwitchCase="'green'"&gt;...&lt;/ng-container&gt;
-    &lt;ng-container *ngSwitchCase="'red'"&gt;...&lt;/ng-container&gt;
-    &lt;ng-container *ngSwitchDefault&gt;...&lt;/ng-container&gt;
+&nbsp;&nbsp;&lt;ng-container *ngSwitchCase="'green'"&gt;...&lt;/ng-container&gt;
+&nbsp;&nbsp;&lt;ng-container *ngSwitchCase="'red'"&gt;...&lt;/ng-container&gt;
+&nbsp;&nbsp;&lt;ng-container *ngSwitchDefault&gt;...&lt;/ng-container&gt;
 &lt;/ng-container&gt;
 \`\`\`
 
@@ -84,6 +85,36 @@ Angular bietet auch die Möglichkeit, switch-case blöcke direkt im Template zu 
 {{ '}' }}
 \`\`\`
         
+    </div>
+</div>
+<br>
+              
+## For-Iteration
+Der For-Loop wurde in der alten Schreibweise über die *ngFor direktive durchgeführt und benötigte den Import des \`CommonModule\`.
+Über den neuen Control Flow wird dies über \`\&#64;for()\` abgebildet. Wichtig hierbei ist, dass ein **track** Parameter gesetzt werden muss. Dieser dient der Identifikation der einzelnen Objekte für die Change Detection.
+
+<div class="flex w-full gap-4">
+    <div class="flex-1">
+
+        #### Direktiven version (vor v17):
+
+        \`\`\`html
+        &lt;ng-container *ngFor="let item of items()"&gt;
+        &nbsp;&nbsp;&lt;span&gt;{{'{'}}{{'{'}} item.name {{'}'}}{{'}'}}&lt;/span&gt;
+        &lt;/ng-container&gt;
+        \`\`\`
+
+    </div>
+    <div class="flex-1">
+
+        #### Neuer Control Flow (ab v17):
+
+        \`\`\`html
+        &#64;for (item of items();track item.id) {{ '{' }}
+        &nbsp;&nbsp;&lt;span&gt;{{'{'}}{{'{'}} item.name {{'}'}}{{'}'}}&lt;/span&gt;
+        {{ '}' }}
+        \`\`\`
+
     </div>
 </div>
           </app-examplebox-description>
