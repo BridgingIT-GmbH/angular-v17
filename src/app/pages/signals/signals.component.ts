@@ -57,7 +57,7 @@ Beispielcode:
   const computedSignal = computed(() => sourceSignal() + addSignal());
 \`\`\`
               
-Hierbei wird die Funktion \`computed\` genutzt um ein neues Signal auf Basis von \`sourceSignal\` und \`sourceSignal\` zu erstellen. 
+Hierbei wird die Funktion \`computed\` genutzt um ein neues Signal auf Basis von \`sourceSignal\` und \`addSignal\` zu erstellen. 
 Wird eines der beiden Signals geupdated, erhält \`computedSignal\` ebenfalls einen neuen Wert.
 
 Im Beispiel der \`ParentComponent\` wird das **Computed Signal** genutzt um den Wert von \`counter\` genutzt um diesen mit 2 zu multiplizieren (Vgl. Source Code: 3).
